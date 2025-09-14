@@ -1,12 +1,12 @@
-*.o
-*.mod
-*.smod
-*.a
-*.so
-*.dll
-*.dylib
-*.exe
-*.out
+# *.o
+# *.mod
+# *.smod
+# *.a
+# *.so
+# *.dll
+# *.dylib
+# *.exe
+# *.out
 
 *.gch
 *.pch
