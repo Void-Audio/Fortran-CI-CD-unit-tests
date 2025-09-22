@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build with CMake and Make",
+      "type": "shell",
+      "command": "mkdir -p build && cd build && cmake .. && make && cd ..",
+      "group": {
+        "kind": "build",
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Rename shared object (.so)",
+      "type": "shell",
+      "command": "python3",
+      "args": [
+          "lib.py"
+      ]
+    }
+  ]
+}

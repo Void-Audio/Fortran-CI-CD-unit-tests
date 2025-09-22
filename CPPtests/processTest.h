@@ -1,15 +1,16 @@
 #pragma once
-#include <cstddef>
-#include "FORTRAN.h"  
+#include "FORTRAN.h"
 
-class TestProcess {
+
+// C++ helper class to test the buffer 
+class ProcessTest {
+
 public:
-    explicit TestProcess(VOID_Verb_t* v) : verb(v) {}
 
-    void ProcessBuffer(const float* input, float* output, size_t nFrames);
+    // Push @bufferSize input floats through process function
+static void testProcess(const std::vector<float>& inBuffer, std::vector<float>& outBuffer, int bufferSize);
 
-    VOID_Verb_t* getVerbPointer() const { return verb; }
 
-private:
-    VOID_Verb_t* verb;
+
+
 };
