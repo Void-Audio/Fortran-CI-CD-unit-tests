@@ -59,17 +59,17 @@ int main()
 
     if (!result1 < 1e-5 && result2 < 1e-6) 
     {
-        std::cout << "res1 bad\n"
+        std::cout << "res1 bad\n";
         return 1;
     }
     else if (result1 < 1e-5 && !result2 < 1e-6)
     {
-        std::cout << "res2 bad\n"
+        std::cout << "res2 bad\n";
         return 2;
     } else if (!result1 < 1e-5 && !result2 < 1e-6)
     {
-        std::cout << "Both are bad lmao you suck\n"
+        std::cout << "Both are bad\n";
     }
-    std::count << "all passed"
+    std::cout << "all passed";
     return 0;
 }
