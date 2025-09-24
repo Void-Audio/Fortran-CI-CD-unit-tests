@@ -6,6 +6,7 @@ on:
       - 'kernel/**' 
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   run_unit_tests:
@@ -16,11 +17,37 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build and run tests
+        env:
+          PAT: ${{ secrets.TARGET_REPO_PAT }}
         run: |
           python3 lib.py
           mkdir -p build
           cd build
           cmake ..
-          make 
+          make
           cd ..
+          
           build/UnitTestExe
+          TEST_EXIT=$?
+
+          if [ $TEST_EXIT -ne 0 ]; then
+            echo "Unit test failed with code $TEST_EXIT — stopping workflow"
+            exit 1
+          fi
+
+          TARGET_REPO="https://$PAT@github.com/Void-Audio/iPlug2OOS.git"
+          TMP_DIR=$(mktemp -d)
+          git clone $TARGET_REPO $TMP_DIR
+          cd $TMP_DIR
+          git checkout incoming || git checkout -b incoming
+
+          rm -rf kernel
+          cp -r $GITHUB_WORKSPACE/kernel ./kernel
+
+          git add kernel
+          if ! git diff --cached --quiet; then
+            git commit -m "Update kernel from Unit Test workflow"
+            git push origin incoming
+          else
+            echo "No changes to push."
+          fi
