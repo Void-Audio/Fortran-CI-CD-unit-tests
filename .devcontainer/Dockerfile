@@ -2,13 +2,11 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system packages including gfortran, pip, and other dev tools
-RUN apt-get update && apt-get install -y --no-install-recommends gfortran
-
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
         git \
+        gfortran \
         cmake \
         make \
         nano \
@@ -45,10 +43,10 @@ ENV PATH="/home/VOID/.local/bin:$PATH"
 RUN echo "source /etc/bash_completion" >> /home/VOID/.bashrc && \
     echo "alias python=python3" >> /home/VOID/.bashrc && \
     echo "alias lr='ls -lart'" >> /home/VOID/.bashrc && \
-    echo "alias cd..='cd ..'" >> /home/VOID/.bashrc
-    alias gitmain=scripts/gitmain
-    alias gitbranch=scripts/gitbranch
-    alias gitster=scripts/gitster
+    echo "alias cd..='cd ..'" >> /home/VOID/.bashrc && \
+    echo "alias gitmain=scripts/gitmain" >> /home/VOID/.bashrc && \
+    echo "gitbranch=scripts/gitbranch" >> /home/VOID/.bashrc && \
+    echo "alias gitster=scripts/gitster" >> /home/VOID/.bashrc
 
 # Install Python package
 RUN pip3 install --user fortls

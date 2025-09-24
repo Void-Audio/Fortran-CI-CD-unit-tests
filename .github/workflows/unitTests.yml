@@ -16,6 +16,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "Codespace Bot"
+          git config --global user.email "codespace-bot@example.com"
+
       - name: Build and run tests
         env:
           PAT: ${{ secrets.TARGET_REPO_PAT }}
