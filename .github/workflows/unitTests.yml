@@ -1,0 +1,25 @@
+name: Target Repo Unit Tests
+
+on:
+  push:
+    paths:
+      - 'kernel/**'   # Only trigger if kernel folder changes
+    branches:
+      - main
+
+jobs:
+  run_unit_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Build and run tests
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          make 
+          cd ..
+          build/UnitTestExe
