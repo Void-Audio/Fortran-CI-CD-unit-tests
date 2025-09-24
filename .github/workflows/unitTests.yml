@@ -17,6 +17,7 @@ jobs:
 
       - name: Build and run tests
         run: |
+          python3 lib.py
           mkdir -p build
           cd build
           cmake ..
