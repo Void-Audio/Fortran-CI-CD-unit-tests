@@ -3,7 +3,7 @@ name: Target Repo Unit Tests
 on:
   push:
     paths:
-      - 'kernel/**'   # Only trigger if kernel folder changes
+      - 'kernel/**' 
     branches:
       - main
 
