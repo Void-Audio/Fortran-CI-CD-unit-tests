@@ -4,7 +4,7 @@
 
 class RBTest {
 public:
-    static void testRB(std::vector<float>& outBuffer, int bufferSize);
+    static void testRB(float* outBuffer, int bufferSize);
 
 
 };

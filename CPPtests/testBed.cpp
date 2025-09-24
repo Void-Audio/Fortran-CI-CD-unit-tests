@@ -20,7 +20,7 @@ int main()
     std::vector<std::vector<float>> inBuffers(numBuffers, std::vector<float>(bufferSize));
     std::vector<std::vector<float>> outBuffers(numBuffers, std::vector<float>(bufferSize));
 
-    std::vector<float> flatOutBuffer(flattenedBuffers);
+    float  flatOutBuffer[bufferSize];
 
 
     std::random_device rd;
@@ -46,27 +46,30 @@ int main()
 
     float result2  = 0.0f;
 
-    RBTest::testRB(flatOutBuffer, numBuffers*bufferSize);
+    //RBTest::testRB(flatOutBuffer, numBuffers*bufferSize);
 
-    for (int b = 0; b < numBuffers; ++b) {
-        for (int i = 0; i < bufferSize; ++i) {
-            result2 += std::pow(inBuffers[b][i] - flatOutBuffer[b*bufferSize + 1],2); // simple L2 norm 
-        }
-    }
+    RBTest::testRB(flatOutBuffer, 512);
+
+    // // for (int b = 0; b < numBuffers; ++b) {
+    //     for (int i = 0; i < bufferSize; ++i) {
+    //         // result2 += std::pow(inBuffers[b][i] - flatOutBuffer[b*bufferSize + i],2); // simple L2 norm 
+    //         result2 += std::pow(inBuffers[0][i] - flatOutBuffer[i],2); // simple L2 norm 
+    //     }
+    // // }
     
     std::cout << "result1, result2: " << result1 << ", " << result2 << "\n";
 
 
-    if (!result1 < 1e-5 && result2 < 1e-6) 
+    if (!(result1 < 1e-5) && (result2 < 1e-6)) 
     {
         std::cout << "res1 bad\n";
         return 1;
     }
-    else if (result1 < 1e-5 && !result2 < 1e-6)
+    else if ((result1 < 1e-5) && !(result2 < 1e-6))
     {
         std::cout << "res2 bad\n";
         return 2;
-    } else if (!result1 < 1e-5 && !result2 < 1e-6)
+    } else if (!(result1 < 1e-5) && !(result2 < 1e-6))
     {
         std::cout << "Both are bad\n";
     }
