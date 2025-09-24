@@ -36,43 +36,24 @@ int main()
         ProcessTest::testProcess(inBuffers[b],  outBuffers[b], bufferSize);
     }
 
-    float result1  = 0.0f;
+    float result  = 0.0f;
 
     for (int b = 0; b < numBuffers; ++b) {
         for (int i = 0; i < bufferSize; ++i) {
-            result1 += std::pow(inBuffers[b][i] - outBuffers[b][i],2); // simple L2 norm 
+            result += std::pow(inBuffers[b][i] - outBuffers[b][i],2); // simple L2 norm 
         }
     }
 
-    float result2  = 0.0f;
 
-    //RBTest::testRB(flatOutBuffer, numBuffers*bufferSize);
-
-    RBTest::testRB(flatOutBuffer, 512);
-
-    // // for (int b = 0; b < numBuffers; ++b) {
-    //     for (int i = 0; i < bufferSize; ++i) {
-    //         // result2 += std::pow(inBuffers[b][i] - flatOutBuffer[b*bufferSize + i],2); // simple L2 norm 
-    //         result2 += std::pow(inBuffers[0][i] - flatOutBuffer[i],2); // simple L2 norm 
-    //     }
-    // // }
     
-    std::cout << "result1, result2: " << result1 << ", " << result2 << "\n";
+    std::cout << result << "\n";
 
 
-    if (!(result1 < 1e-5) && (result2 < 1e-6)) 
+    if (!(result < 1e-5))
     {
-        std::cout << "res1 bad\n";
+        std::cout << "result bad ( .neq. 0 ) \n";
         return 1;
     }
-    else if ((result1 < 1e-5) && !(result2 < 1e-6))
-    {
-        std::cout << "res2 bad\n";
-        return 2;
-    } else if (!(result1 < 1e-5) && !(result2 < 1e-6))
-    {
-        std::cout << "Both are bad\n";
-    }
-    std::cout << "all passed";
+
     return 0;
 }
