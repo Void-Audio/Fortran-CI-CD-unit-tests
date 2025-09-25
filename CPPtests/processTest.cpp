@@ -4,6 +4,6 @@ void ProcessTest::testProcess(const std::vector<float>& inBuffer, std::vector<fl
 {
     for (int i = 0 ; i < bufferSize; i++)
     {
-        outBuffer[i] = inBuffer[i];
+        vprocess(&inBuffer[i], &outBuffer[i]);
     }
 }
